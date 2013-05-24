@@ -1,4 +1,4 @@
-﻿namespace ивс_тест_2
+﻿namespace test_2
 {
     class Program
     {
