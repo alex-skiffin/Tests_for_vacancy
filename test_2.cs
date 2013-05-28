@@ -45,7 +45,14 @@ namespace test_2
                     mnozh += 2;
                 }
             }
-            vyvod += vhod.ToString();
+            if (vhod == 1)
+            {
+                vyvod += vhod.ToString();
+            }
+            else
+            {
+                vyvod += vhod.ToString() + "*1";
+            }
             System.Console.WriteLine(vyvod);
             System.Console.Write("Нажмите любую клавишу для закрытия.");
             System.Console.ReadKey(true);
