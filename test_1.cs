@@ -24,16 +24,42 @@ namespace test_1
             }
             int[] massiv = new int[razmer];
 
-            //заполняем массив случайными числами
-            System.Random random = new System.Random();
-            for (int i = 0; i < razmer; i++)
-            {
-                massiv[i] = massiv[i == 0 ? 0 : i - 1] + random.Next(10); //шаг небольшой, но для примера хватит
-            }
 
-            //тестовый массив. ответ - 26
-            //int[] massiv = new[] { 0, 1, 2, 4, 5, 6, 7, 27, 33 };
-            //выводим результат
+            System.Console.WriteLine("Укажите способ заполнения. \r\n1-вручную      2-случайными числами");
+            int vybor;
+            //проверяем вводимые данные
+            if (!int.TryParse(System.Console.ReadLine(), out vybor))
+            {
+                System.Console.WriteLine("Указано неправильное значение");
+                System.Console.WriteLine("\r\nНажмите любую клавишу для закрытия");
+                System.Console.ReadKey(true);
+                return;
+            }
+            if (vybor == 1)
+            {
+                for (int i = 0; i < razmer; i++)
+                {
+                    massiv[i] = int.Parse(System.Console.ReadLine());
+                }
+            }
+            else
+            {
+                //заполняем массив случайными числами
+                System.Random random = new System.Random();
+                for (int i = 0; i < razmer; i++)
+                {
+                    massiv[i] = massiv[i == 0 ? 0 : i - 1] + random.Next(5); //шаг небольшой, но для примера хватит
+                }
+                //тестовый массив[24]. ответ - 26
+                //int[] massiv = new[] { 0,1,2,4,5,6,7,27,33,34,35,38,39,40,42,45,47,49,51,53,54,56,57,59 };
+
+                //выводим результат случайного заполнения
+                foreach (var i in massiv)
+                {
+                    System.Console.Write(i + "  ");
+                }
+            }
+            System.Console.Write("\n");
             System.Console.WriteLine(Razchet(massiv) + "\r\nНажмите любую клавишу для закрытия");
             System.Console.ReadKey(true);
         }
@@ -41,37 +67,15 @@ namespace test_1
         //расчет и поиск минимиального значения
         public static string Razchet(int[] vhod)
         {
-            bool[] can = new bool[(vhod.Length<<vhod.Length)+1];
+            int k = 0;
+            int minZnach = 0;
 
-            //используем битовый сдвиг
-            for (int i = 0; i < ((1 << vhod.Length) - 1); i++)
+            while ((k != vhod.Length-1)&&(vhod[k + 1] <= minZnach + 1))
             {
-                int sum = 0;
-                for (int j = 0; j < vhod.Length; j++)
-                {
-                    sum += ProvBit(i, j)*vhod[j];
-                }
-                if (sum > 0)
-                    {
-                        can[sum] = true;
-                    }
-                
+                minZnach = minZnach + vhod[k + 1];
+                k++;
             }
-            //ищем минимальное значение
-            for (int i = 1; i < (vhod.Length<<vhod.Length); i++)
-            {
-                if (!can[i])
-                {
-                    return i.ToString();
-                }
-            }
-            return "Нет такого числа\r\n";
-        }
-
-        //проверка бита
-        private static int ProvBit(int n, int i)
-        {
-            return (n & (1 << i)) != 0 ? 1 : 0;
+            return (minZnach + 1).ToString();
         }
     }
 }
