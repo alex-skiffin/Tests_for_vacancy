@@ -68,7 +68,7 @@ namespace test_1
         public static string Razchet(int[] vhod)
         {
             int k = 0;
-            int minZnach = 0;
+            int minZnach = vhod[k];
 
             while ((k != vhod.Length-1)&&(vhod[k + 1] <= minZnach + 1))
             {
