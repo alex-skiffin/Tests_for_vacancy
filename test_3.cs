@@ -42,12 +42,16 @@ namespace test_3
 
             //Заполняем массив
             System.Random random = new System.Random();
-            for (int x = 1; x < tableSize; x++)
+            for (int x = 0; x < tableSize; x++)
             {
-                for (int y = 1; y < tableSize; y++)
+                for (int y = 0; y < tableSize; y++)
                 {
-                    massiv[x,y] = random.Next(10); 
+                    massiv[x,y] = random.Next(10);
+
+                    //отбразим получившийся массив
+                    System.Console.Write(massiv[x, y]+" ");
                 }
+                System.Console.WriteLine("");
             }
 
             //выбор квадрата
@@ -63,7 +67,9 @@ namespace test_3
                         for (int l = y; l < squreSize + y; l++)
                         {
                             sum += massiv[k, l];
+                            System.Console.Write(massiv[k, l] + " ");
                         }
+                        System.Console.WriteLine("");
                     }
                     System.Console.WriteLine("Сумма квадрата {0} равна {1}",nomer,sum);
                     nomer++;
