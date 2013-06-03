@@ -32,8 +32,9 @@ namespace macroscop_client_test
                 // отправляем broadcast запрос
                 Socket zaprosServ = new Socket(AddressFamily.InterNetwork, SocketType.Dgram,ProtocolType.Udp);
                 IPAddress broadcast = IPAddress.Broadcast;
-                string args = textBox1.Text;
-                byte[] sendbuf = Encoding.UTF8.GetBytes(args);
+
+                // сообщение серверу
+                byte[] sendbuf = Encoding.UTF8.GetBytes("Hello, server!");
                 IPEndPoint ep = new IPEndPoint(broadcast, 13171);
                 zaprosServ.EnableBroadcast = true;
                 zaprosServ.SendTo(sendbuf, ep);
