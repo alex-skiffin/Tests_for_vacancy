@@ -20,7 +20,11 @@ namespace test_2
             while ((vhod % 2) == 0)
             {
                 vhod = vhod / 2;
-                vyvod += "2*";
+                if(vhod==1) vyvod += "2";
+                else
+                {
+                    vyvod += "2*";
+                }
             }
 
             //первый нечетный множитель
@@ -35,9 +39,9 @@ namespace test_2
                 //проверяем множитель
                 if ((vhod % mnozh) == 0)
                 {
-                    vyvod += mnozh.ToString() + "*";
                     vhod = vhod / mnozh;
                     c = (int)System.Math.Sqrt(vhod) + 1;
+                    vyvod += mnozh.ToString() + "*";
                 }
                 //если множитель не подходит - переходим к следующему нечетному числу
                 else
@@ -45,13 +49,9 @@ namespace test_2
                     mnozh += 2;
                 }
             }
-            if (vhod == 1)
+            if (vhod != 1)
             {
                 vyvod += vhod.ToString();
-            }
-            else
-            {
-                vyvod += vhod.ToString() + "*1";
             }
             System.Console.WriteLine(vyvod);
             System.Console.Write("Нажмите любую клавишу для закрытия.");
